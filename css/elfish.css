@@ -1,0 +1,181 @@
+body {
+    padding: 15px;
+    overflow-x: hidden;
+    font-size: 16pt;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+input {
+    padding: 10px 15px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+input[type="number"] {
+    width: 6em;
+    font-size: 16pt;
+}
+
+.editable {
+    padding: 15px 5px;
+}
+
+.tabs-list {
+    padding: 0;
+}
+
+.tabs-list li {
+    display: inline-block;
+    margin-right: 15px;
+    padding: 15px;
+    border: 1px solid #ccc;
+}
+
+.tabs-list li:hover {
+    border: 1px solid #aaa;
+}
+
+.tabs-list li:active {
+    border: 1px solid red;
+}
+
+.tabs-list .active {
+    background: #ccc;
+    border-color: #777;
+}
+
+.tabs-list .active:hover {
+    background: #ccc;
+    border-color: #777;
+}
+
+.tabs-list .new {
+    padding: 0;
+    border: none;
+}
+.tabs-list .new:hover {
+    border: none;
+}
+.data {
+    position: relative;
+}
+
+.specie {
+    position: absolute;
+    margin-right: -15px;
+    opacity: 0;
+    transition: opacity .5s;
+    top: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.specie.visible {
+    position: relative;
+    opacity: 1;
+    z-index: 1;
+    transition: opacity .5s;
+    transition-delay: .5s;
+    overflow: visible;
+    max-width: 110%;
+}
+
+.group {
+    margin-bottom: 30px;
+}
+
+
+.group-efforts {
+    overflow: auto;
+}
+
+.group-efforts-inner {
+    font-size: 0;
+}
+
+.group-summary {
+    margin: 5px;
+}
+
+.group-plot {
+    background-color: #eee;
+    width: 200px;
+    clear: right;
+    font-size: 13pt;
+    margin: 15px 10px 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    transition: .5s;
+}
+
+.effort {
+    background-color: #eee;
+    width: 200px;
+    float: left;
+    font-size: 13pt;
+    margin: 15px 10px 15px 0;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 300px;
+    transition: .5s;
+}
+
+.new-effort {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.placeholder {
+    background-color: #FFFEE0;
+    position: relative;
+    color: #999;
+    cursor: pointer;
+}
+
+.placeholder:hover {
+    background-color: #FFFF83;
+    color: #333;
+}
+.placeholder:hover * {
+    opacity: 0;
+}
+
+.placeholder:after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    font-size: 120px;
+    line-height: 0;
+    text-align: center;
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    color: inherit;
+    text-shadow: 0 0 10px #fff;
+}
+
+.placeholder * {
+    opacity: 0.05;
+}
+
+.footer {
+    z-index: 2;
+    position: relative;
+}
+
+.red {
+    color: #800;
+}

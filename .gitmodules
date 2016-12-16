@@ -1,0 +1,3 @@
+[submodule "elfish"]
+	path = elfish
+	url = git@github.com:elfishlab/elfish.git
