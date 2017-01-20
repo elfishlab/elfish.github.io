@@ -21,6 +21,13 @@ function plotFindCanvas(sp, gr) {
     return canvas[0].getContext("2d");
 }
 
+function allNegative(arr) {
+    for (var i = 0; i < arr.length; i++)
+        if (arr[i] >= 0)
+            return false;
+    return true;
+}
+
 function updatePlot(sp, gr) {
     var arr = [];
     var est = [];
@@ -29,11 +36,11 @@ function updatePlot(sp, gr) {
 
     if (plotIsValidIndices(sp, gr)) {
         var efforts = window.elfish.species[sp].groups[gr].efforts;
-            for (var i = 0; i < efforts.length; i++) {
+        for (var i = 0; i < efforts.length; i++) {
             arr.push(efforts[i].value);
             labels.push("e" + (i+1)); // effort2, effort3, etc
-            est.push(estimate(arr));
-            cf.push(confidence(arr));
+            est.push(ElfishMathEstimate(arr, window.elfish.method));
+            cf.push(ElfishMathConfidenceInterval(arr, window.elfish.method));
         }
     }
     // we don't plot the first effort since it has no estimate
@@ -41,6 +48,9 @@ function updatePlot(sp, gr) {
     labels.shift();
     est.shift();
     cf.shift();
+
+    if (est.length < 1 || allNegative(est))
+        return;
 
     var chartctx = plotFindCanvas(sp, gr);
     if (chartctx == null) {
