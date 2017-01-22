@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- Elfish version 25 -->
+<!-- Elfish version 27 -->
   <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -80,11 +80,11 @@
              data-group-id="{{group.id}}"
              data-specie-id="{{group.specieid}}">
           <h4>Plot</h4>
-          <canvas style="display:none"
-                  class="canvas-group-plot"
-                  data-group-id="{{group.id}}"
-                  data-specie-id="{{group.specieid}}">
-          </canvas>
+          <div class="canvas-container"
+               data-group-id="{{group.id}}"
+               data-specie-id="{{group.specieid}}">
+            <canvas style="display:none"></canvas>
+          </div>
         </div>
         <div class="group-efforts"
              data-specie-id="{{group.specieid}}"
