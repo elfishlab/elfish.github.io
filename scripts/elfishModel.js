@@ -53,15 +53,21 @@ function ModelPopHistory() {
     return elt;
 }
 
-function ModelAddEffort(s,g,e,name,val) {
+function ModelAddEffort(s,g,e,val) {
     ModelAssertIndex(s,g,-1); // -1 since only s,g must exist
     var elt = {action:  ModelActionEffortAdd,
                species: s,
                group:   g,
-               effort:  e,
-               name:    name};
-    window.elfish.species[s].groups[g].efforts.push({name: name, value: val});
+               effort:  e};
+    window.elfish.species[s].groups[g].efforts.push({value: val});
     ModelAddHistory(elt);
+}
+
+function ModelInsertEffortQuietly(s,g,e,val) {
+    // inserts val into slot s,g,e without adding to history
+    ModelAssertIndex(s,g,e);
+    var elt = {value: val};
+    window.elfish.species[s].groups[g].efforts.splice(e,0,elt);
 }
 
 function ModelDeleteEffort(s,g,e) {
@@ -70,13 +76,11 @@ function ModelDeleteEffort(s,g,e) {
     if (sps[s].groups[g].efforts.length == 0)
         return false;
     var eff = sps[s].groups[g].efforts[e];
-    var name = eff.name;
     var value = eff.value;
     var elt = {action:  ModelActionEffortDel,
                species: s,
                group:   g,
                effort:  e,
-               name:    name,
                value:   value};
     window.elfish.species[s].groups[g].efforts.splice(e,1);
     ModelAddHistory(elt);
@@ -90,16 +94,14 @@ function ModelHistoryUndo() {
     var g = elt.group;
     var e = elt.effort;
     switch (a) {
-    // we pop history since undo shan't be undone.
     case ModelActionEffortAdd:
         ModelAssertIndex(s,g,e);
         ModelDeleteEffort(s,g,e);
-        ModelPopHistory();
+        ModelPopHistory(); // pop history since undo shan't be undone.
         break;
     case ModelActionEffortDel:
         ModelAssertIndex(s,g,e);
-        ModelAddEffort(s,g,e,elt.name,elt.value);
-        ModelPopHistory();
+        ModelInsertEffortQuietly(s,g,e,elt.value);
         break;
     default:
         console.error("Unsupported undo action " + a);
